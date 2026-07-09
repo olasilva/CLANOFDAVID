@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clan of David · Summer Camp 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    :root {
+      --surface: #ffffff;
+      --surface-soft: #e8f2ff;
+      --ink: #0c2b56;
+      --ink-soft: #133f78;
+      --primary: #2168d1;
+      --primary-soft: #69a3ff;
+      --accent: #2ea3ff;
+      --text: #102a43;
+      --text-light: #f8fbff;
+      --muted: #5f758e;
+      --panel: #f3f8ff;
+      --border: rgba(33,104,209,.18);
+      --shadow-sm: 0 12px 40px -12px rgba(12,43,86,.12);
+      --shadow-lg: 0 30px 70px -18px rgba(12,43,86,.22);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--surface-soft);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; margin: 0; }
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-size: .7rem;
+      font-weight: 500;
+      opacity: .7;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* staff */
+    .staff {
+      width: 100%;
+      height: 34px;
+      display: block;
+      opacity: .45;
+      transition: opacity .6s ease;
+    }
+    .staff-gold line, .staff-gold path { stroke: var(--primary-soft); }
+    .staff-ink line, .staff-ink path { stroke: var(--ink); }
+
+    /* ----- HERO with background image of students ----- */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      padding: 6rem 1.5rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-color: #08172d;
+      background-image: url('img/IMG-20260709-WA0056.jpg');
+      background-size: cover;
+      background-position: center center;
+      filter: brightness(.62) saturate(1.08);
+      z-index: 0;
+      transform: scale(1.02);
+      transition: transform 12s ease;
+    }
+    .hero:hover .hero-bg { transform: scale(1.06); }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 30%, rgba(8,25,60,.32), rgba(8,25,60,.72) 80%);
+      backdrop-filter: blur(2px);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 18% 22%, rgba(81,178,255,.3) 0, transparent 60%),
+        radial-gradient(3px 3px at 78% 15%, rgba(35,150,255,.25) 0, transparent 60%),
+        radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,.15) 0, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      z-index: 3;
+      animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .hero-logo {
+      display: block;
+      width: min(180px, 100%);
+      max-width: 180px;
+      margin: 0 auto 1.4rem;
+      padding: .9rem;
+      border-radius: 28px;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 18px 40px rgba(0,0,0,.18);
+    }
+    .hero-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 16px;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero .eyebrow { color: rgba(255,255,255,.7); letter-spacing: .3em; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      line-height: 1.02;
+      margin: 1rem 0 .6rem;
+      font-weight: 600;
+      text-shadow: 0 4px 30px rgba(0,0,0,.3);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--primary-soft);
+      text-shadow: 0 0 40px rgba(105,163,255,.3);
+    }
+    .hero .tagline {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(248,251,255,.9);
+      max-width: 540px;
+      margin: 0 auto 2.2rem;
+      font-weight: 300;
+      letter-spacing: .02em;
+      text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    }
+    .date-ribbon {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: .7rem 1.8rem;
+      border-radius: 40px;
+      font-size: .85rem;
+      letter-spacing: .06em;
+      margin-bottom: 2.6rem;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px -8px rgba(0,0,0,.2);
+      transition: all .3s ease;
+    }
+    .date-ribbon b { color: var(--primary-soft); font-weight: 600; }
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: .8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .9rem 2.2rem;
+      border-radius: 40px;
+      transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-weight: 500;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold {
+      background: var(--primary);
+      color: var(--text-light);
+      box-shadow: 0 12px 28px -8px rgba(33,104,209,.35);
+    }
+    .btn-gold:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 22px 40px -10px rgba(33,104,209,.45);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.4);
+      color: var(--text-light);
+      backdrop-filter: blur(4px);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary-soft);
+      background: rgba(33,104,209,.12);
+      transform: translateY(-4px);
+    }
+
+    /* floating orbs */
+    .hero-scene {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .4;
+      mix-blend-mode: soft-light;
+      will-change: transform;
+    }
+    .hero-shape--circle {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(255,255,255,.3), rgba(33,104,209,.08) 70%);
+      top: 6%; left: 10%;
+      animation: floatA 14s ease-in-out infinite;
+    }
+    .hero-shape--cube {
+      width: 130px; height: 130px;
+      background: radial-gradient(circle, rgba(46,163,255,.2), rgba(33,104,209,.08));
+      top: 30%; left: 78%;
+      animation: floatB 18s ease-in-out infinite;
+      border-radius: 30px;
+      transform: rotate(20deg);
+    }
+    .hero-shape--glow {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(46,163,255,.1), transparent 70%);
+      top: 50%; left: 45%;
+      animation: floatC 20s ease-in-out infinite;
+    }
+    @keyframes floatA {
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(20px,-30px,20px) scale(1.1); }
+    }
+    @keyframes floatB {
+      0%,100% { transform: translate3d(0,0,0) rotate(20deg); }
+      50% { transform: translate3d(-30px,20px,30px) rotate(40deg); }
+    }
+    @keyframes floatC {
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(10px,30px,-20px) scale(1.2); }
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(32px) scale(.98);
+      transition: opacity .9s ease, transform .9s ease;
+      will-change: opacity, transform;
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .reveal-delay-1 { transition-delay: .12s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .28s; }
+
+    /* sections */
+    .section { padding: 6rem 1.5rem; position: relative; }
+    .section-head {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+    .section-head .eyebrow {
+      display: block;
+      margin-bottom: .6rem;
+      color: var(--ink-soft);
+      opacity: .7;
+    }
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--ink);
+    }
+
+    /* flyer */
+    .flyer {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all .5s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      will-change: transform;
+    }
+    .flyer:hover {
+      transform: translateY(-8px) scale(1.005);
+      box-shadow: var(--shadow-lg);
+    }
+    .flyer-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1px 1fr;
+    }
+    .flyer-col { padding: 2.8rem 2.4rem; }
+    .flyer-divider {
+      background: repeating-linear-gradient(to bottom, var(--border) 0 8px, transparent 8px 16px);
+      opacity: .5;
+    }
+    .flyer-col h3 {
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .flyer-col h3 .tag {
+      font-family: 'Jost', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--surface);
+      padding: .2rem .6rem;
+      border-radius: 20px;
+      opacity: .8;
+    }
+    .discipline-list {
+      list-style: none;
+      margin: 0 0 1.8rem;
+      padding: 0;
+    }
+    .discipline-list li {
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(12,43,86,.08);
+      font-size: .95rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .discipline-list li:last-child { border-bottom: none; }
+    .discipline-list span.note {
+      color: var(--muted);
+      font-size: .8rem;
+      font-style: italic;
+    }
+    .schedule-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .schedule-list li {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      padding: .6rem 0;
+      border-bottom: 1px solid rgba(12,43,86,.08);
+      font-size: .92rem;
+    }
+    .schedule-list li:last-child { border-bottom: none; }
+    .schedule-list .day {
+      font-weight: 600;
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+    }
+    .venue-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.6rem;
+    }
+    .venue-chip {
+      font-size: .7rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border: 1px solid var(--primary);
+      color: var(--ink);
+      padding: .3rem .9rem;
+      border-radius: 20px;
+      background: rgba(33,104,209,.04);
+    }
+    .flyer-footer {
+      grid-column: 1 / -1;
+      padding: 1.2rem 2.4rem;
+      background: var(--ink);
+      color: var(--text-light);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: .8rem;
+      border-radius: 0 0 24px 24px;
+    }
+    .flyer-footer b { color: var(--primary-soft); }
+    .note-editable {
+      max-width: 1000px;
+      margin: 1.2rem auto 0;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      font-style: italic;
+      opacity: .7;
+    }
+
+    #program,
+    .gallery {
+      position: relative;
+      overflow: hidden;
+    }
+    #program::before,
+    .gallery::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: .25;
+      filter: brightness(.85) saturate(1.05);
+      z-index: 0;
+      transition: opacity .35s ease;
+    }
+    #program::before {
+      background-image: url('img/IMG-20260709-WA0054.jpg');
+    }
+    .gallery::before {
+      background-image: url('img/IMG-20260709-WA0057%20(1).jpg');
+    }
+    #program::after,
+    .gallery::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(248,251,255,.02), rgba(248,251,255,.12));
+      z-index: 1;
+    }
+    #program > .section-head,
+    #program > .flyer,
+    .gallery > .section-head,
+    .gallery > .gallery-grid,
+    .gallery > .gallery-note {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 260px;
+      box-shadow: 0 20px 45px rgba(16,42,80,.08);
+      background: rgba(255,255,255,.95);
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s ease;
+    }
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,25,60,0) 0%, rgba(8,25,60,.32) 100%);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    .gallery-card:hover::after {
+      opacity: .8;
+    }
+    .gallery-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1.2rem 1rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(4,15,42,.96) 100%);
+      color: var(--text-light);
+      transform: translateY(100%);
+      transition: transform .35s ease;
+      pointer-events: none;
+    }
+    .gallery-card:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    .gallery-caption h3 {
+      margin: 0 0 .35rem;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+    }
+    .gallery-caption p {
+      margin: 0;
+      font-size: .85rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,.9);
+    }
+    .gallery-note {
+      max-width: 1120px;
+      margin: 1rem auto 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    @media (max-width: 980px) {
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+
+    /* registration */
+    .reg-section {
+      position: relative;
+      color: var(--text-light);
+      background-color: #08172d;
+    }
+    .reg-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('img/IMG-20260709-WA0055.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: .55;
+      filter: brightness(.78) saturate(1.05);
+      z-index: 0;
+    }
+    .reg-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,25,60,.75), rgba(8,25,60,.82));
+      z-index: 1;
+    }
+    .reg-section .section-head,
+    .reg-section .reg-card {
+      position: relative;
+      z-index: 2;
+    }
+    .reg-section .section-head .eyebrow { color: var(--primary-soft); opacity: .9; }
+    .reg-section .section-head h2 { color: var(--text-light); }
+    .reg-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 2.8rem;
+      border-radius: 32px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px -12px rgba(0,0,0,.3);
+      transition: box-shadow .4s ease;
+    }
+    .reg-card:hover { box-shadow: 0 30px 70px -14px rgba(0,0,0,.4); }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .field { margin-bottom: 1.2rem; }
+    .field label {
+      display: block;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      margin-bottom: .4rem;
+      opacity: .8;
+    }
+    .field input, .field select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,.25);
+      color: var(--text-light);
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      padding: .5rem .1rem;
+      outline: none;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .field input:focus, .field select:focus {
+      border-bottom-color: var(--primary-soft);
+      box-shadow: 0 2px 0 var(--primary-soft);
+    }
+    .field input::placeholder { color: rgba(248,251,255,.5); }
+    .field select option { color: var(--ink); }
+
+    .instrument-field {
+      margin-bottom: 1.2rem;
+    }
+    .instrument-field label {
+      display: block;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      margin-bottom: .4rem;
+      opacity: .8;
+    }
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 1.4rem;
+    }
+    legend {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary-soft);
+      margin-bottom: .6rem;
+      padding: 0;
+      opacity: .8;
+    }
+    .campus-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .6rem;
+    }
+    .campus-option {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: .6rem .9rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: .85rem;
+      transition: all .25s ease;
+    }
+    .campus-option:has(input:checked) {
+      border-color: var(--primary-soft);
+      background: rgba(33,104,209,.15);
+      box-shadow: 0 0 20px rgba(33,104,209,.1);
+    }
+    .campus-option input { accent-color: var(--primary-soft); width: auto; }
+
+    .submit-row { margin-top: 1.8rem; text-align: center; }
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: var(--text-light);
+      border: none;
+      padding: 1rem;
+      border-radius: 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: .8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 12px 28px -8px rgba(33,104,209,.3);
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px -8px rgba(33,104,209,.4);
+    }
+    .submit-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .form-msg {
+      margin-top: 1rem;
+      font-size: .85rem;
+      text-align: center;
+      min-height: 1.4em;
+    }
+    .form-msg.ok { color: var(--primary-soft); }
+    .form-msg.err { color: #e08a8a; }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,25,58,.7);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      max-width: 440px;
+      width: 100%;
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 32px;
+      padding: 2.4rem;
+      box-shadow: 0 40px 80px rgba(0,0,0,.4);
+      text-align: center;
+      transform: translateY(20px) scale(.96);
+      animation: modalIn .5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalIn {
+      to { transform: translateY(0) scale(1); }
+    }
+    .modal h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: .6rem;
+      color: var(--ink);
+    }
+    .modal p {
+      margin: 0 0 1.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .modal button {
+      background: var(--primary);
+      color: var(--text-light);
+      border: none;
+      padding: .9rem 2.2rem;
+      border-radius: 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .1em;
+      cursor: pointer;
+      transition: all .3s ease;
+      box-shadow: 0 10px 24px -8px rgba(33,104,209,.25);
+    }
+    .modal button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -8px rgba(33,104,209,.35);
+    }
+
+    footer {
+      padding: 2.4rem 1.5rem;
+      background: var(--ink);
+      border-top: 1px solid rgba(198,154,61,.12);
+      color: rgba(246,241,228,.5);
+      text-align: center;
+      font-size: .78rem;
+      letter-spacing: .04em;
+    }
+
+    /* responsive */
+    @media (max-width: 760px) {
+      .flyer-grid { grid-template-columns: 1fr; }
+      .flyer-divider { display: none; }
+      .field-row, .campus-options { grid-template-columns: 1fr; }
+      .reg-card { padding: 1.8rem; }
+      .flyer-col { padding: 1.8rem; }
+      .hero { min-height: 70vh; padding: 4rem 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO with background image of students -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-logo"><img src="img/IMG-20260531-WA0013.jpg" alt="Clan of David logo"></div>
+    <span class="eyebrow">Clan of David Art &amp; Music Academy · Abuja</span>
+    <h1>Summer Camp <em>2026</em></h1>
+    <p class="tagline">Five weeks of disciplined practice and open imagination — for young musicians and artists finding their first voice, and returning students sharpening theirs.</p>
+    <div class="date-ribbon">
+      <span><b>July 27 – August 28, 2026</b></span>
+      <span style="opacity:.4;font-weight:300;">|</span>
+      <span>Ages 5 – 17</span>
+    </div>
+    <div class="cta-row">
+      <a href="#register" class="btn btn-gold">Reserve a Seat</a>
+      <a href="#program" class="btn btn-outline">View Program</a>
+    </div>
+  </div>
+  <div class="hero-scene" aria-hidden="true">
+    <div class="hero-shape hero-shape--circle"></div>
+    <div class="hero-shape hero-shape--cube"></div>
+    <div class="hero-shape hero-shape--glow"></div>
+  </div>
+</section>
+
+<!-- staff -->
+<svg class="staff staff-gold" viewBox="0 0 1000 34" preserveAspectRatio="none">
+  <line x1="0" y1="7" x2="1000" y2="7" stroke-width="1"/>
+  <line x1="0" y1="13" x2="1000" y2="13" stroke-width="1"/>
+  <line x1="0" y1="19" x2="1000" y2="19" stroke-width="1"/>
+  <line x1="0" y1="25" x2="1000" y2="25" stroke-width="1"/>
+  <line x1="0" y1="31" x2="1000" y2="31" stroke-width="1"/>
+</svg>
+
+<!-- PROGRAM -->
+<section class="section" id="program">
+  <div class="section-head scroll-reveal reveal-delay-1">
+    <span class="eyebrow">The Program</span>
+    <h2>Check out our programs and break down</h2>
+  </div>
+  <div class="flyer scroll-reveal reveal-delay-2">
+    <div class="flyer-grid">
+      <div class="flyer-col">
+        <h3>Disciplines <span class="tag">Music</span></h3>
+        <ul class="discipline-list">
+          <li>Piano &amp; Keyboard <span class="note">Beginner–Advanced</span></li>
+          <li>Guitar (Acoustic &amp; Bass) <span class="note">Beginner–Advanced</span></li>
+          <li>Voice &amp; Choral Training <span class="note">All levels</span></li>
+          <li>Violin</li>
+          <li>Drums &amp; Percussion</li>
+          <li>Music Theory &amp; Composition</li>
+        </ul>
+        <h3>Disciplines <span class="tag">Art</span></h3>
+        <ul class="discipline-list">
+          <li>Drawing &amp; Painting</li>
+          <li>Mixed Media &amp; Craft</li>
+          <li>Digital Illustration <span class="note">13+</span></li>
+        </ul>
+      </div>
+      <div class="flyer-divider"></div>
+      <div class="flyer-col">
+        <h3>Camp Rhythm</h3>
+        <ul class="schedule-list">
+          <li><span class="day">Wk 1</span><span>Orientation, instrument placement &amp; foundations</span></li>
+          <li><span class="day">Wk 2–3</span><span>Core technique — daily instrument &amp; studio sessions</span></li>
+          <li><span class="day">Wk 4</span><span>Ensemble rehearsal &amp; gallery preparation</span></li>
+          <li><span class="day">Wk 5</span><span>Recital week — closing concert &amp; art showcase</span></li>
+        </ul>
+        <div class="venue-strip">
+          <span class="venue-chip">Lugbe Campus</span>
+          <span class="venue-chip">Wuye Campus</span>
+          <span class="venue-chip">Online</span>
+          <span class="venue-chip">Private 1-on-1</span>
+        </div>
+      </div>
+      <div class="flyer-footer">
+        <span>Mon – Fri · 9:00am – 1:00pm</span>
+        <span><b>Early bird closes July 10</b></span>
+        <span>Sibling &amp; returning-student discounts available</span>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="section gallery" id="gallery">
+  <div class="section-head scroll-reveal reveal-delay-1">
+    <span class="eyebrow">Gallery</span>
+    <h2>Camp Moments</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260531-WA0013.jpg" alt="Summer camp students"><div class="gallery-caption"><h3>Studio Session</h3><p>Young musicians explore voice, guitar, and piano in a supportive creative space.</p></div></div>
+    <div class="gallery-card scroll-reveal reveal-delay-3"><img src="img/IMG-20260709-WA0055.jpg" alt="Art and music session"><div class="gallery-caption"><h3>Art &amp; Music Fusion</h3><p>Creative workshops blend visual art with rhythm and sound for every age.</p></div></div>
+    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0053%20(1).jpg" alt="One-on-one mentoring"><div class="gallery-caption"><h3>One-on-One Mentoring</h3><p>Private coaching sessions help each student grow with focused musical guidance.</p></div></div>
+    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0054.jpg" alt="Camp background scene"><div class="gallery-caption"><h3>Camp Life</h3><p>Fresh moments from our summer camp, featuring students immersed in creative learning.</p></div></div>
+    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0056.jpg" alt="Group rehearsal scene"><div class="gallery-caption"><h3>Rehearsal Practice</h3><p>Ensemble rehearsals build confidence and teamwork ahead of performance week.</p></div></div>
+    <div class="gallery-card scroll-reveal reveal-delay-3"><img src="img/IMG-20260709-WA0057%20(1).jpg" alt="Camp performance"><div class="gallery-caption"><h3>Performance Showcase</h3><p>Closing concerts and art displays celebrate every student’s progress.</p></div></div>
+  </div>
+  <p class="gallery-note">A selection of moments from our lessons, performances, and creative workshops.</p>
+</section>
+
+<!-- staff -->
+<svg class="staff staff-ink" viewBox="0 0 1000 34" preserveAspectRatio="none">
+  <line x1="0" y1="7" x2="1000" y2="7" stroke-width="1"/>
+  <line x1="0" y1="13" x2="1000" y2="13" stroke-width="1"/>
+  <line x1="0" y1="19" x2="1000" y2="19" stroke-width="1"/>
+  <line x1="0" y1="25" x2="1000" y2="25" stroke-width="1"/>
+  <line x1="0" y1="31" x2="1000" y2="31" stroke-width="1"/>
+</svg>
+
+<!-- REGISTRATION -->
+<section class="section reg-section" id="register">
+  <div class="section-head scroll-reveal reveal-delay-1">
+    <span class="eyebrow">Reserve a Seat</span>
+    <h2>Registration</h2>
+  </div>
+  <form class="reg-card scroll-reveal reveal-delay-2" id="campForm" action="https://formspree.io/f/xojoorzy" method="POST">
+    <input type="hidden" name="_replyto" id="replyToInput">
+    <input type="hidden" name="_subject" value="Summer Camp Registration">
+    <input type="hidden" name="_template" value="table">
+    <div class="field">
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" name="Student Name" placeholder="Full name" required>
+    </div>
+    <div class="field">
+      <label for="ageGroup">Age Group</label>
+      <select id="ageGroup" name="Age Group" required>
+        <option value="" disabled selected>Select age group</option>
+        <option>5 – 8 years</option>
+        <option>9 – 12 years</option>
+        <option>13 – 17 years</option>
+        <option>18+ years</option>
+      </select>
+    </div>
+    <fieldset>
+      <legend>Choice of Instruments</legend>
+      <div class="field instrument-field">
+        <label for="instrument1">Primary Instrument</label>
+        <input type="text" id="instrument1" name="Instrument Choice 1" placeholder="e.g. Piano" required>
+      </div>
+      <div class="field instrument-field">
+        <label for="instrument2">Second Instrument</label>
+        <input type="text" id="instrument2" name="Instrument Choice 2" placeholder="e.g. Guitar (optional)">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Choice of Campus</legend>
+      <div class="campus-options">
+        <label class="campus-option"><input type="radio" name="Campus" value="Lugbe" required> Lugbe</label>
+        <label class="campus-option"><input type="radio" name="Campus" value="Wuye" required> Wuye</label>
+        <label class="campus-option"><input type="radio" name="Campus" value="Online" required> Online</label>
+        <label class="campus-option"><input type="radio" name="Campus" value="Private (one-on-one)" required> Private (one-on-one)</label>
+      </div>
+    </fieldset>
+    <div class="field-row">
+      <div class="field"><label for="sponsorName">Sponsor Name</label><input type="text" id="sponsorName" name="Sponsor Name" placeholder="Parent / guardian" required></div>
+      <div class="field"><label for="phone">Phone Number</label><input type="tel" id="phone" name="Phone Number" placeholder="+234 ..." required></div>
+    </div>
+    <div class="field"><label for="email">Email Address</label><input type="email" id="email" name="Email Address" placeholder="you@example.com" required></div>
+    <div class="submit-row">
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Registration</button>
+      <p class="form-msg" id="formMsg"></p>
+    </div>
+  </form>
+  <div class="modal-overlay" id="confirmationModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2>Registration Confirmed</h2>
+      <p>Thank you for registering! A confirmation email has been sent and we will be in touch with details for the Summer Camp.</p>
+      <button type="button" id="closeModal">Return to page</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Clan of David Art &amp; Music Academy — Summer Camp 2026 · Abuja, Nigeria
+</footer>
+
+<script>
+  const form = document.getElementById('campForm');
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+  const emailInput = document.getElementById('email');
+  const replyToInput = document.getElementById('replyToInput');
+  const modal = document.getElementById('confirmationModal');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    msg.textContent = '';
+    msg.className = 'form-msg';
+    replyToInput.value = emailInput.value.trim();
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        msg.textContent = 'Registration received — confirmation sent.';
+        msg.classList.add('ok');
+        form.reset();
+        modal.classList.add('open');
+      } else {
+        throw new Error('Service error');
+      }
+    } catch (err) {
+      msg.textContent = 'Something went wrong. Please try again or call the academy.';
+      msg.classList.add('err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Submit Registration';
+    }
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    btn.focus();
+  }
+  closeModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  const revealItems = document.querySelectorAll('.scroll-reveal');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function revealOnScroll(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }
+
+  if (prefersReducedMotion) {
+    revealItems.forEach(item => item.classList.add('visible'));
+  } else {
+    const revealObserver = new IntersectionObserver(revealOnScroll, {
+      threshold: 0.16
+    });
+    revealItems.forEach(item => revealObserver.observe(item));
+  }
+</script>
+</body>
+</html>
