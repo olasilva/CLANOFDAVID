@@ -562,11 +562,61 @@
       font-size: .88rem;
     }
 
-    @media (max-width: 980px) {
-      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 1200px) {
+      .section { padding: 5rem 1.5rem; }
+      .hero { padding: 5rem 1.5rem 4rem; }
+      .hero h1 { font-size: clamp(3rem, 5vw, 4.2rem); }
+      .hero .tagline { max-width: 620px; }
+      .cta-row { justify-content: center; }
+      .gallery-grid { gap: 1rem; }
+      .gallery-card { min-height: 260px; }
+      .flyer-grid { grid-template-columns: 1fr 1fr; }
+      .flyer-col { padding: 2rem; }
+      .flyer-footer { gap: 1rem; }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 980px) {
+      .flyer-grid { grid-template-columns: 1fr; }
+      .flyer-divider { display: none; }
+      .flyer-col { padding: 1.8rem; }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { min-height: 72vh; padding: 5rem 1.5rem 4rem; }
+      .hero h1 { font-size: clamp(2.6rem, 6vw, 3.6rem); }
+      .date-ribbon { flex-direction: column; align-items: center; gap: .6rem; }
+      .cta-row { flex-direction: column; }
+      .gallery-card { min-height: 240px; }
+      .section { padding: 5rem 1.5rem; }
+    }
+    @media (max-width: 760px) {
       .gallery-grid { grid-template-columns: 1fr; }
+      .flyer-grid { grid-template-columns: 1fr; }
+      .flyer-divider { display: none; }
+      .field-row, .campus-options { grid-template-columns: 1fr; }
+      .reg-card { padding: 1.8rem; }
+      .flyer-col { padding: 1.4rem; }
+      .hero { min-height: 68vh; padding: 4rem 1rem 3rem; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero .tagline { font-size: 1rem; max-width: 100%; }
+      .cta-row { width: 100%; }
+      .cta-row .btn { width: 100%; justify-content: center; }
+      .gallery-card { min-height: 220px; }
+      .flyer-footer { flex-direction: column; align-items: flex-start; }
+      .section { padding: 4rem 1rem; }
+      .reg-card { margin: 0 0 1rem; }
+    }
+    @media (max-width: 520px) {
+      .hero { min-height: 62vh; padding: 3rem .9rem 2.5rem; }
+      .hero h1 { font-size: 2.4rem; }
+      .date-ribbon { padding: .65rem 1rem; }
+      .section { padding: 3rem .9rem; }
+      .section-head { margin-bottom: 2rem; }
+      .flyer-col { padding: 1.2rem; }
+      .reg-card { padding: 1.4rem; }
+      .gallery-card { min-height: 200px; }
+      .gallery-caption { padding: 1rem .8rem; }
+      .gallery-note { font-size: .82rem; }
+      .modal { padding: 1.8rem; }
+      .modal button { width: 100%; }
+      .hero-scene { display: none; }
     }
 
     /* registration */
@@ -797,14 +847,6 @@
     }
 
     /* responsive */
-    @media (max-width: 760px) {
-      .flyer-grid { grid-template-columns: 1fr; }
-      .flyer-divider { display: none; }
-      .field-row, .campus-options { grid-template-columns: 1fr; }
-      .reg-card { padding: 1.8rem; }
-      .flyer-col { padding: 1.8rem; }
-      .hero { min-height: 70vh; padding: 4rem 1rem; }
-    }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
