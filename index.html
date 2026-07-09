@@ -243,6 +243,46 @@
       top: 50%; left: 45%;
       animation: floatC 20s ease-in-out infinite;
     }
+    .loader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem;
+      background: linear-gradient(180deg, rgba(8,23,45,.96), rgba(8,23,45,.99));
+      color: var(--text-light);
+      text-align: center;
+    }
+    .loader-overlay img {
+      width: min(220px, 70%);
+      max-width: 220px;
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+      animation: loaderPulse 1.6s ease-in-out infinite alternate;
+    }
+    .loader-overlay h2 {
+      font-size: 1.3rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .loader-overlay p {
+      margin: 0;
+      opacity: .78;
+      max-width: 320px;
+    }
+    .loader-overlay.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+    @keyframes loaderPulse {
+      to { transform: translateY(-6px) scale(1.02); box-shadow: 0 32px 78px rgba(0,0,0,.45); }
+    }
     @keyframes floatA {
       0%,100% { transform: translate3d(0,0,0) scale(1); }
       50% { transform: translate3d(20px,-30px,20px) scale(1.1); }
@@ -771,6 +811,11 @@
   </style>
 </head>
 <body>
+  <div class="loader-overlay" id="pageLoader" aria-hidden="true">
+    <img src="img/IMG-20260531-WA0013.jpg" alt="Loading Camp Experience">
+    <h2>Clan of David</h2>
+    <p>Loading summer camp experience...</p>
+  </div>
 
 <!-- HERO with background image of students -->
 <section class="hero">
@@ -1018,6 +1063,14 @@
     });
     revealItems.forEach(item => revealObserver.observe(item));
   }
+
+  const pageLoader = document.getElementById('pageLoader');
+  window.addEventListener('load', () => {
+    if (pageLoader) {
+      pageLoader.classList.add('fade-out');
+      setTimeout(() => pageLoader.remove(), 750);
+    }
+  });
 </script>
 </body>
 </html>
