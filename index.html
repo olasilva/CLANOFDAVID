@@ -490,18 +490,48 @@
       z-index: 2;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      max-width: 1120px;
+    .gallery-marquee {
+      max-width: 1180px;
       margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 24px;
+      padding: .2rem 0;
+    }
+    .gallery-marquee::before,
+    .gallery-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .gallery-marquee::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(248,251,255,.96), transparent);
+    }
+    .gallery-marquee::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(248,251,255,.96), transparent);
+    }
+    .gallery-track {
+      display: flex;
+      width: max-content;
+      gap: 1rem;
+      animation: gallerySlide 28s linear infinite;
+    }
+    .gallery-track:hover {
+      animation-play-state: paused;
     }
     .gallery-card {
       position: relative;
       overflow: hidden;
       border-radius: 24px;
-      min-height: 260px;
+      min-height: 280px;
+      width: min(320px, 78vw);
+      flex: 0 0 min(320px, 78vw);
       box-shadow: 0 20px 45px rgba(16,42,80,.08);
       background: rgba(255,255,255,.95);
     }
@@ -560,6 +590,10 @@
       text-align: center;
       color: var(--muted);
       font-size: .88rem;
+    }
+    @keyframes gallerySlide {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     @media (max-width: 1200px) {
@@ -868,9 +902,9 @@
     <h1>Summer Camp <em>2026</em></h1>
     <p class="tagline">Five weeks of disciplined practice and open imagination — for young musicians and artists finding their first voice, and returning students sharpening theirs.</p>
     <div class="date-ribbon">
-      <span><b>July 27 – August 28, 2026</b></span>
+      <span><b>July 20 – August 28, 2026</b></span>
       <span style="opacity:.4;font-weight:300;">|</span>
-      <span>Ages 5 – 17</span>
+      <span>Ages 3 – 18</span>
     </div>
     <div class="cta-row">
       <a href="#register" class="btn btn-gold">Reserve a Seat</a>
@@ -917,6 +951,11 @@
           <li>Mixed Media &amp; Craft</li>
           <li>Digital Illustration <span class="note">13+</span></li>
         </ul>
+        <h3>Disciplines <span class="tag">Dance</span></h3>
+        <ul class="discipline-list">
+          <li>Ballet &amp; Contemporary</li>
+          <li>Hip Hop &amp; Street Styles</li>
+          <li>Choreography &amp; Performance</li>
       </div>
       <div class="flyer-divider"></div>
       <div class="flyer-col">
@@ -926,6 +965,7 @@
           <li><span class="day">Wk 2–3</span><span>Core technique — daily instrument &amp; studio sessions</span></li>
           <li><span class="day">Wk 4</span><span>Ensemble rehearsal &amp; gallery preparation</span></li>
           <li><span class="day">Wk 5</span><span>Recital week — closing concert &amp; art showcase</span></li>
+          <li><span class="day">Wk 6</span><span>Band grouping week — performance esembles &amp; Summer concert</span></li>
         </ul>
         <div class="venue-strip">
           <span class="venue-chip">Lugbe Campus</span>
@@ -949,13 +989,43 @@
     <span class="eyebrow">Gallery</span>
     <h2>Camp Moments</h2>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260531-WA0013.jpg" alt="Summer camp students"><div class="gallery-caption"><h3>Studio Session</h3><p>Young musicians explore voice, guitar, and piano in a supportive creative space.</p></div></div>
-    <div class="gallery-card scroll-reveal reveal-delay-3"><img src="img/IMG-20260709-WA0055.jpg" alt="Art and music session"><div class="gallery-caption"><h3>Art &amp; Music Fusion</h3><p>Creative workshops blend visual art with rhythm and sound for every age.</p></div></div>
-    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0053%20(1).jpg" alt="One-on-one mentoring"><div class="gallery-caption"><h3>One-on-One Mentoring</h3><p>Private coaching sessions help each student grow with focused musical guidance.</p></div></div>
-    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0054.jpg" alt="Camp background scene"><div class="gallery-caption"><h3>Camp Life</h3><p>Fresh moments from our summer camp, featuring students immersed in creative learning.</p></div></div>
-    <div class="gallery-card scroll-reveal reveal-delay-2"><img src="img/IMG-20260709-WA0056.jpg" alt="Group rehearsal scene"><div class="gallery-caption"><h3>Rehearsal Practice</h3><p>Ensemble rehearsals build confidence and teamwork ahead of performance week.</p></div></div>
-    <div class="gallery-card scroll-reveal reveal-delay-3"><img src="img/IMG-20260709-WA0057%20(1).jpg" alt="Camp performance"><div class="gallery-caption"><h3>Performance Showcase</h3><p>Closing concerts and art displays celebrate every student’s progress.</p></div></div>
+  <div class="gallery-marquee">
+    <div class="gallery-track">
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260531-WA0013.jpg" alt="Summer camp students"><div class="gallery-caption"><h3>Studio Session</h3><p>Young musicians explore voice, guitar, and piano in a supportive creative space.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260709-WA0055.jpg" alt="Art and music session"><div class="gallery-caption"><h3>Art &amp; Music Fusion</h3><p>Creative workshops blend visual art with rhythm and sound for every age.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0053%20(1).jpg" alt="One-on-one mentoring"><div class="gallery-caption"><h3>One-on-One Mentoring</h3><p>Private coaching sessions help each student grow with focused musical guidance.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0054.jpg" alt="Camp background scene"><div class="gallery-caption"><h3>Camp Life</h3><p>Fresh moments from our summer camp, featuring students immersed in creative learning.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0056.jpg" alt="Group rehearsal scene"><div class="gallery-caption"><h3>Rehearsal Practice</h3><p>Ensemble rehearsals build confidence and teamwork ahead of performance week.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260709-WA0057%20(1).jpg" alt="Camp performance"><div class="gallery-caption"><h3>Performance Showcase</h3><p>Closing concerts and art displays celebrate every student’s progress.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0001.jpg" alt="Camp activity"><div class="gallery-caption"><h3>Camp Activity</h3><p>Fresh energy and joyful moments from the latest sessions.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0002.jpg" alt="Creative workshop"><div class="gallery-caption"><h3>Creative Workshop</h3><p>Hands-on activities bring imagination and music together.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0003.jpg" alt="Students in class"><div class="gallery-caption"><h3>Learning Together</h3><p>Students build confidence while sharing ideas and talents.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0004.jpg" alt="Group portrait"><div class="gallery-caption"><h3>Community Spirit</h3><p>Every session celebrates friendship, growth, and creativity.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0005.jpg" alt="Performance prep"><div class="gallery-caption"><h3>Performance Prep</h3><p>Rehearsals and practice sessions are full of focus and excitement.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0006.jpg" alt="Camp showcase"><div class="gallery-caption"><h3>Showcase Moment</h3><p>Moments of excellence shine during our summer showcase events.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0007.jpg" alt="Student focus"><div class="gallery-caption"><h3>Focused Learning</h3><p>Dedicated practice and mentoring help each student thrive.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0008.jpg" alt="Camp laughter"><div class="gallery-caption"><h3>Camp Laughter</h3><p>Joyful moments keep the spirit of the camp alive.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0009.jpg" alt="Creative collaboration"><div class="gallery-caption"><h3>Creative Collaboration</h3><p>Students work together across disciplines and ideas.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0010.jpg" alt="Artful expression"><div class="gallery-caption"><h3>Artful Expression</h3><p>Visual and musical creativity come together in every session.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0011.jpg" alt="Camp finale"><div class="gallery-caption"><h3>Camp Finale</h3><p>The experience closes with confidence, pride, and celebration.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260531-WA0013.jpg" alt="Summer camp students"><div class="gallery-caption"><h3>Studio Session</h3><p>Young musicians explore voice, guitar, and piano in a supportive creative space.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260709-WA0055.jpg" alt="Art and music session"><div class="gallery-caption"><h3>Art &amp; Music Fusion</h3><p>Creative workshops blend visual art with rhythm and sound for every age.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0053%20(1).jpg" alt="One-on-one mentoring"><div class="gallery-caption"><h3>One-on-One Mentoring</h3><p>Private coaching sessions help each student grow with focused musical guidance.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0054.jpg" alt="Camp background scene"><div class="gallery-caption"><h3>Camp Life</h3><p>Fresh moments from our summer camp, featuring students immersed in creative learning.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260709-WA0056.jpg" alt="Group rehearsal scene"><div class="gallery-caption"><h3>Rehearsal Practice</h3><p>Ensemble rehearsals build confidence and teamwork ahead of performance week.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260709-WA0057%20(1).jpg" alt="Camp performance"><div class="gallery-caption"><h3>Performance Showcase</h3><p>Closing concerts and art displays celebrate every student’s progress.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0001.jpg" alt="Camp activity"><div class="gallery-caption"><h3>Camp Activity</h3><p>Fresh energy and joyful moments from the latest sessions.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0002.jpg" alt="Creative workshop"><div class="gallery-caption"><h3>Creative Workshop</h3><p>Hands-on activities bring imagination and music together.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0003.jpg" alt="Students in class"><div class="gallery-caption"><h3>Learning Together</h3><p>Students build confidence while sharing ideas and talents.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0004.jpg" alt="Group portrait"><div class="gallery-caption"><h3>Community Spirit</h3><p>Every session celebrates friendship, growth, and creativity.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0005.jpg" alt="Performance prep"><div class="gallery-caption"><h3>Performance Prep</h3><p>Rehearsals and practice sessions are full of focus and excitement.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0006.jpg" alt="Camp showcase"><div class="gallery-caption"><h3>Showcase Moment</h3><p>Moments of excellence shine during our summer showcase events.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0007.jpg" alt="Student focus"><div class="gallery-caption"><h3>Focused Learning</h3><p>Dedicated practice and mentoring help each student thrive.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0008.jpg" alt="Camp laughter"><div class="gallery-caption"><h3>Camp Laughter</h3><p>Joyful moments keep the spirit of the camp alive.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0009.jpg" alt="Creative collaboration"><div class="gallery-caption"><h3>Creative Collaboration</h3><p>Students work together across disciplines and ideas.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-3"><img src="IMG/IMG-20260710-WA0010.jpg" alt="Artful expression"><div class="gallery-caption"><h3>Artful Expression</h3><p>Visual and musical creativity come together in every session.</p></div></div>
+      <div class="gallery-card scroll-reveal reveal-delay-2"><img src="IMG/IMG-20260710-WA0011.jpg" alt="Camp finale"><div class="gallery-caption"><h3>Camp Finale</h3><p>The experience closes with confidence, pride, and celebration.</p></div></div>
+    </div>
   </div>
   <p class="gallery-note">A selection of moments from our lessons, performances, and creative workshops.</p>
 </section>
@@ -987,7 +1057,7 @@
       <label for="ageGroup">Age Group</label>
       <select id="ageGroup" name="Age Group" required>
         <option value="" disabled selected>Select age group</option>
-        <option>5 – 8 years</option>
+        <option>3 – 8 years</option>
         <option>9 – 12 years</option>
         <option>13 – 17 years</option>
         <option>18+ years</option>
