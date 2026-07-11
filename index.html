@@ -534,13 +534,20 @@
       flex: 0 0 min(320px, 78vw);
       box-shadow: 0 20px 45px rgba(16,42,80,.08);
       background: rgba(255,255,255,.95);
+      opacity: 0;
+      transform: translateY(18px) scale(.96);
+      animation: galleryCardIn .8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: calc(var(--card-index, 0) * .06s);
     }
+    .gallery-card:nth-child(2n) { --card-index: 1; }
+    .gallery-card:nth-child(3n) { --card-index: 2; }
+    .gallery-card:nth-child(4n) { --card-index: 3; }
     .gallery-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .35s ease;
+      transition: transform .45s ease;
     }
     .gallery-card:hover img {
       transform: scale(1.08);
@@ -564,11 +571,16 @@
       padding: 1.2rem 1rem;
       background: linear-gradient(180deg, transparent 0%, rgba(4,15,42,.96) 100%);
       color: var(--text-light);
+      opacity: 0;
       transform: translateY(100%);
-      transition: transform .35s ease;
+      transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1), opacity .45s ease;
       pointer-events: none;
+      animation: captionPop .7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: .12s;
     }
-    .gallery-card:hover .gallery-caption {
+    .gallery-card:hover .gallery-caption,
+    .gallery-card:focus-within .gallery-caption {
+      opacity: 1;
       transform: translateY(0);
     }
     .gallery-caption h3 {
@@ -594,6 +606,18 @@
     @keyframes gallerySlide {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
+    }
+    @keyframes captionPop {
+      0% { opacity: 0; transform: translateY(24px) scale(.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes galleryCardIn {
+      from { opacity: 0; transform: translateY(18px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes captionPop {
+      from { opacity: 0; transform: translateY(100%); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 1200px) {
@@ -1081,6 +1105,20 @@
         <label class="campus-option"><input type="radio" name="Campus" value="Wuye" required> Wuye</label>
         <label class="campus-option"><input type="radio" name="Campus" value="Online" required> Online</label>
         <label class="campus-option"><input type="radio" name="Campus" value="Private (one-on-one)" required> Private (one-on-one)</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>After-School / Post-Holiday Program</legend>
+      <div class="field">
+        <label for="followUpProgram">Choose a program</label>
+        <select id="followUpProgram" name="Follow-Up Program">
+          <option value="" disabled selected>Select an option</option>
+          <option>Weekend Program</option>
+          <option>Saturday Program</option>
+          <option>Private Program</option>
+          <option>Online</option>
+          <option>None for now</option>
+        </select>
       </div>
     </fieldset>
     <div class="field-row">
